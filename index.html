@@ -1,216 +1,435 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>FIFA Games</title>
+<title>FIFA Games - Download</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Tahoma, sans-serif;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* الخلفية */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 50% 15%, rgba(0, 255, 170, .12), transparent 35%),
+        radial-gradient(circle at 10% 80%, rgba(0, 120, 255, .08), transparent 30%),
+        #000;
+    z-index: -2;
+}
+
+/* الحاوية */
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+    padding: 45px 0;
+}
+
+/* اللوجو */
+.logo-box {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 10px auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-box::before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: rgba(0, 255, 180, .2);
+    filter: blur(35px);
+    animation: glow 2.5s infinite alternate;
+}
+
+.logo {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 25px;
+    animation: logoFloat 3s ease-in-out infinite;
+    box-shadow:
+        0 0 25px rgba(0,255,180,.35),
+        0 0 60px rgba(0,180,255,.15);
+}
+
+@keyframes glow {
+    from {
+        transform: scale(.85);
+        opacity: .5;
     }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #26304a 0%, #10131d 40%, #07090e 100%);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
+    to {
+        transform: scale(1.15);
+        opacity: 1;
     }
+}
+
+@keyframes logoFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* العنوان */
+.title {
+    font-size: clamp(38px, 8vw, 75px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(
+        90deg,
+        #00ffd5,
+        #00aaff,
+        #ffffff,
+        #00ffd5
+    );
+    background-size: 300%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: titleMove 5s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes titleMove {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 300%;
+    }
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+/* زر التحميل */
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-width: 260px;
+    padding: 18px 35px;
+
+    color: #000;
+    background: linear-gradient(135deg, #00ffd5, #00aaff);
+    border-radius: 15px;
+
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+
+    box-shadow:
+        0 0 20px rgba(0,255,200,.4),
+        0 0 50px rgba(0,170,255,.15);
+
+    animation: buttonPulse 2s infinite;
+    transition: .25s;
+}
+
+.download-button:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow:
+        0 0 30px rgba(0,255,200,.7),
+        0 0 70px rgba(0,170,255,.3);
+}
+
+@keyframes buttonPulse {
+    0%,100% {
+        box-shadow:
+            0 0 20px rgba(0,255,200,.4),
+            0 0 50px rgba(0,170,255,.15);
+    }
+    50% {
+        box-shadow:
+            0 0 35px rgba(0,255,200,.75),
+            0 0 80px rgba(0,170,255,.3);
+    }
+}
+
+/* معلومات التطبيق */
+.info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px auto 45px;
+}
+
+.info-box {
+    min-width: 140px;
+    padding: 14px 20px;
+    border: 1px solid #222;
+    background: rgba(255,255,255,.035);
+    border-radius: 12px;
+    color: #bbb;
+}
+
+.info-box strong {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* الصور */
+.section-title {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.screenshots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-bottom: 60px;
+}
+
+.screenshot {
+    width: 100%;
+    border-radius: 18px;
+    border: 1px solid #222;
+    background: #111;
+    transition: .3s;
+    box-shadow: 0 8px 30px rgba(0,0,0,.5);
+}
+
+.screenshot:hover {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow:
+        0 0 25px rgba(0,255,200,.2),
+        0 15px 40px rgba(0,0,0,.7);
+}
+
+/* التعليمات */
+.instructions {
+    text-align: right;
+    max-width: 750px;
+    margin: auto;
+    background: rgba(255,255,255,.035);
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.instructions h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.instructions ol {
+    padding-right: 25px;
+    line-height: 2;
+    color: #ccc;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+}
+
+/* الفوتر */
+footer {
+    margin-top: 60px;
+    padding: 25px;
+    border-top: 1px solid #1c1c1c;
+    color: #666;
+    font-size: 14px;
+}
+
+/* الموبايل */
+@media (max-width: 600px) {
 
     .container {
-      width: 100%;
-      max-width: 850px;
-      text-align: center;
+        width: 94%;
+        padding-top: 30px;
+    }
+
+    .logo-box {
+        width: 145px;
+        height: 145px;
     }
 
     .logo {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 28px;
-      margin-bottom: 25px;
-      box-shadow: 0 15px 45px rgba(0,0,0,.5);
+        width: 125px;
+        height: 125px;
     }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 12px;
-      letter-spacing: 1px;
+    .screenshots {
+        grid-template-columns: 1fr;
     }
 
-    .subtitle {
-      color: #b8bfce;
-      font-size: 18px;
-      margin-bottom: 35px;
-    }
-
-    .card {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 25px;
-      padding: 30px;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-
-    .download {
-      display: inline-block;
-      width: 100%;
-      max-width: 420px;
-      padding: 18px 25px;
-      background: linear-gradient(135deg, #19d66b, #0da653);
-      color: white;
-      text-decoration: none;
-      font-size: 20px;
-      font-weight: bold;
-      border-radius: 15px;
-      transition: .2s;
-      box-shadow: 0 10px 30px rgba(25,214,107,.25);
-      margin-bottom: 25px;
-    }
-
-    .download:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(25,214,107,.35);
-    }
-
-    .info {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 10px;
+    .download-button {
+        width: 90%;
     }
 
     .info-box {
-      background: rgba(255,255,255,.06);
-      padding: 18px 10px;
-      border-radius: 15px;
+        min-width: 110px;
+        flex: 1;
     }
-
-    .info-box span {
-      display: block;
-      color: #8f98aa;
-      font-size: 13px;
-      margin-bottom: 7px;
-    }
-
-    .info-box strong {
-      font-size: 16px;
-    }
-
-    .instructions {
-      text-align: left;
-      margin-top: 30px;
-      background: rgba(0,0,0,.18);
-      padding: 22px;
-      border-radius: 18px;
-    }
-
-    .instructions h2 {
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    .instructions p {
-      color: #c5cad5;
-      line-height: 1.7;
-      margin-bottom: 8px;
-    }
-
-    footer {
-      margin-top: 25px;
-      color: #737b8c;
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 36px;
-      }
-
-      .subtitle {
-        font-size: 15px;
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .info {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- ضع صورة التطبيق هنا -->
-    <img src="icon.png" class="logo" alt="FIFA Games">
+    <!-- اللوجو -->
+    <div class="logo-box">
+        <img src="icon.png" class="logo" alt="FIFA Games">
+    </div>
 
-    <h1>FIFA Games</h1>
+    <!-- الاسم -->
+    <h1 class="title">FIFA Games</h1>
 
     <p class="subtitle">
-      Your football gaming experience starts here.
+        حمل اللعبة واستمتع بالتجربة ⚽🔥
     </p>
 
-    <div class="card">
-
-      <!-- غيّر الرابط ده إلى رابط الـ APK الخاص بك -->
-      <a
-        class="download"
+    <!-- زر التحميل -->
+    <a
+        class="download-button"
         href="FIFA-Games.apk"
-        target="_blank">
-        ⬇️ Download FIFA Games
-      </a>
+        download="FIFA-Games-2.12.apk"
+    >
+        ⬇️ تحميل FIFA Games
+    </a>
 
-      <div class="info">
+    <!-- معلومات -->
+    <div class="info">
 
         <div class="info-box">
-          <span>Version</span>
-          <strong>2.12.0</strong>
+            <strong>2.12</strong>
+            الإصدار
         </div>
 
         <div class="info-box">
-          <span>Platform</span>
-          <strong>Android</strong>
+            <strong>Android</strong>
+            المنصة
         </div>
 
         <div class="info-box">
-          <span>File</span>
-          <strong>APK</strong>
+            <strong>APK</strong>
+            نوع الملف
         </div>
 
-      </div>
+        <div class="info-box">
+            <strong id="downloads">0</strong>
+            تحميل
+        </div>
 
-      <div class="instructions">
+    </div>
 
-        <h2>📱 How to install</h2>
+    <!-- صور اللعبة -->
+    <h2 class="section-title">🎮 صور من اللعبة</h2>
 
-        <p>1. اضغط على Download FIFA Games.</p>
-        <p>2. انتظر حتى يكتمل تحميل ملف APK.</p>
-        <p>3. افتح ملف APK وابدأ عملية التثبيت.</p>
-        <p>4. إذا ظهر تحذير بسبب التثبيت من خارج المتجر، اسمح بالتثبيت من هذا المصدر.</p>
+    <div class="screenshots">
 
-      </div>
+        <img src="game1.jpg"
+             class="screenshot"
+             alt="FIFA Games Screenshot 1">
+
+        <img src="game2.jpg"
+             class="screenshot"
+             alt="FIFA Games Screenshot 2">
+
+        <img src="game3.jpg"
+             class="screenshot"
+             alt="FIFA Games Screenshot 3">
+
+        <img src="game4.jpg"
+             class="screenshot"
+             alt="FIFA Games Screenshot 4">
+
+        <img src="game5.jpg"
+             class="screenshot"
+             alt="FIFA Games Screenshot 5">
+
+        <img src="game6.jpg"
+             class="screenshot"
+             alt="FIFA Games Screenshot 6">
+
+    </div>
+
+    <!-- طريقة التثبيت -->
+    <div class="instructions">
+
+        <h2>📲 طريقة تثبيت اللعبة</h2>
+
+        <ol>
+            <li>اضغط على زر تحميل FIFA Games.</li>
+            <li>انتظر حتى يكتمل تحميل ملف APK.</li>
+            <li>افتح ملف APK بعد انتهاء التحميل.</li>
+            <li>إذا ظهر تحذير تثبيت من مصدر غير معروف، اسمح بالتثبيت من هذا المصدر.</li>
+            <li>اضغط تثبيت واستمتع باللعبة ⚽🔥</li>
+        </ol>
 
     </div>
 
     <footer>
-      © 2026 FIFA Games — All Rights Reserved
+        © 2026 FIFA Games — All Rights Reserved
     </footer>
 
-  </div>
+</div>
+
+<script>
+
+/*
+    زر التحميل:
+    هنا تقدر بعدين تربطه بعداد تحميلات حقيقي
+*/
+
+const downloadButton = document.querySelector(".download-button");
+
+downloadButton.addEventListener("click", function () {
+
+    const counter = document.getElementById("downloads");
+
+    /*
+       عداد محلي تجريبي.
+       لو عايز عداد حقيقي يظهر عدد تحميلات
+       كل الناس، هنربطه بعدين بـ GitHub Releases API.
+    */
+
+    let downloads = Number(localStorage.getItem("fifa_downloads") || 0);
+
+    downloads++;
+
+    localStorage.setItem("fifa_downloads", downloads);
+
+    counter.textContent = downloads;
+});
+
+</script>
 
 </body>
 </html>
